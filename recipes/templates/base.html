@@ -1,0 +1,51 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>New Recipe - Scrumptious</title>
+        <link rel="stylesheet" href="{% static 'css/app.css' %}">
+    </head>
+    
+    <body>
+        <header>
+            <nav>
+                <ul>
+                    <li>
+                        <a href="{% url 'home' %}">Scrumptious</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'tags_list' %}">Tags</a>
+                    </li>
+    
+                    <li>
+                        <a href="{% url 'recipe_new' %}">Write a recipe</a>
+                    </li>
+                
+                        <a href="{% url 'login' %}">Login</a>
+                    </li>
+                    {% if user.is_authenticated %}
+                    <li>
+                        <a href="{% url 'logout' %}">Logout</a>
+                    </li>
+                    {% endif %}
+    
+                    {% if user.is_staff %}
+                    <li>
+                        <a href="{% url 'admin:index' %}">Admin</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </nav>
+            {% block pagination %}
+            {% endblock pagination %}
+        </header>
+        {% block content %}
+        {% endblock content %}
+</body>
+
+</html>

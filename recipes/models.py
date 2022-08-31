@@ -1,18 +1,23 @@
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
+from django.conf import settings
+
+USER_MODEL = settings.AUTH_USER_MODEL
 
 
 # Create your models here.
 class Recipe(models.Model):
     name = models.CharField(max_length=125)
-    author = models.CharField(max_length=100)
     description = models.TextField()
     image = models.URLField(null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+    author = models.ForeignKey(
+        USER_MODEL, related_name="recipes", on_delete=models.CASCADE, null=True
+    )
 
     def __str__(self):
-        return self.name + " by " + self.author
+        return self.name + " by " + str(self.author)
 
 
 class Measure(models.Model):

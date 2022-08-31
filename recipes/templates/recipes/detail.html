@@ -1,36 +1,8 @@
+{% extends 'base.html' %}
 {% load static %}
 {% load markdownify %}
 
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>New Recipe - Scrumptious</title>
-  <link rel="stylesheet" href="{% static 'css/app.css' %}">
-</head>
-
-<body>
-  <header>
-    <nav>
-      <ul>
-        <li>
-          <a href="{% url 'home' %}">Scrumptious</a>
-        </li>
-        <li>
-          <a href="{% url 'tags_list' %}">Tags</a>
-        </li>
-        <li>
-          <a href="{% url 'admin:index' %}">Admin</a>
-        </li>
-        <li>
-          <a href="{% url 'recipe_new' %}">Write a recipe</a>
-        </li>
-      </ul>
-    </nav>
-  </header>
+{%block content%}
   <main class="recipe-detail">
     <div>
       <a href="{% url 'recipe_edit' recipe.id %}">Edit</a>
@@ -40,6 +12,7 @@
       <img src="{{ recipe.image }}" class="pull-right">
     {% endif %}
     <h1>{{ recipe.name }}</h1>
+    <h2>by: {{recipe.author | default_if_none:"Unknown"}}</h2>
     <p>
       Created on {{ recipe.created }} |
       Updated on {{ recipe.updated }}
@@ -78,6 +51,7 @@
       {% endfor %}
     </ol>
   </main>
+{%endblock content %}
 </body>
 
 </html>
