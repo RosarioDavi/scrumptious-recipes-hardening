@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block pagination %}
+<main class="recipe-form">
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <div class="control">
+      <button class="button">Update</button>
+    </div>
+  </form>
+</main>
+{% endblock pagination %}

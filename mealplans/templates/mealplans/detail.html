@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block pagination %}
+<main class="tag-detail">
+
+<div>
+    <a href="{% url 'mealplans_edit' mealplan.id %}">Edit</a>
+    <a href="{% url 'mealplans_delete' mealplan.id%}">Delete</a>
+  </div>
+
+  <h2>Recipes for {{ mealplan.owner }}</h2>
+  {% for recipe in mealplan.recipes.all %}
+  <p>
+    <a href="{% url 'recipe_detail' recipe.pk %}">{{ recipe.name }}</a>
+  </p>
+  {% endfor %}
+</main>
+{% endblock pagination %}

@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load static %}
+
 {% load markdownify %}
 
 {%block content%}
@@ -41,6 +41,13 @@
             <td>{{ ingredient.measure.name }}</td>
             <td>{{ ingredient.food.name }}</td>
           </tr>
+          <td>
+            <form method="POST" action="{% url 'shopping_item_create' %}">
+              {% csrf_token %}
+              <input type="hidden" name="ingredient_id" value="{{ ingredient.id }}">
+              <button>+ shopping list</button>
+            </form>
+          </td>
         {% endfor %}
       </tbody>
     </table>

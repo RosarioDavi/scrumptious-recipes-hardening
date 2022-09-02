@@ -1,12 +1,13 @@
 {% extends 'base.html' %}
+{%block content%}
+<h1>Create Meal Plans</h1>
 
-{% block content %}
-  <main class="recipe-form">
+  <main class="mealplan-form">
     <form method="post">
       {% csrf_token %}
       {{ form.as_p }}
       <div class="control">
-        <button class="button">Update</button>
+        <button class="button">Create</button>
       </div>
     </form>
   </main>

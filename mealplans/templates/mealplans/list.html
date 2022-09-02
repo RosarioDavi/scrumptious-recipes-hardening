@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
-
-
-
 {% block pagination %}
+
+
+<li><a href="{% url 'mealplans_create' %}">Create Meal Plan</a></li>
+<h1> Meal Plans </h1>
+  <main class="recipe-grid">
     <div class="pagination">
       <span class="step-links">
         {% if page_obj.has_previous %}
@@ -19,17 +21,15 @@
           <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
         {% endif %}
       </span>
+        {% for meal in plans%}
+          <div class="recipe-card">
+            <h2 class="recipe-card-title">
+              <a href = "{% url 'mealplans_detail' meal.pk %}">{{ meal.name }} </a>
+            </h2>
+            {% comment %} """<p class="recipe-card-date">{{ recipe.updated }}</p> {% endcomment %}
+          </div>
+        {% endfor %}
+    
     </div>
-  </header>
-  <main class="recipe-grid">
-    {% for recipe in recipe_list %}
-      <div class="recipe-card">
-        <h2 class="recipe-card-title">
-          <a href="{% url 'recipe_detail' recipe.pk %}">{{ recipe.name }}</a>
-        </h2>
-        <p class="recipe-card-date">{{ recipe.updated }}</p>
-      </div>
-    {% endfor %}
   </main>
-  {% endblock pagination %}
-
+{% endblock pagination %}
